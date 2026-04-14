@@ -61,6 +61,7 @@ class AppCard extends StatefulWidget
 class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
   bool _moving = false;
   bool _clicked = false;
+  bool _wasHighlighted = false;
   DateTime? _lastMoveAt;
   late FocusNode _focusNode;
 
@@ -81,6 +82,7 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _focusNode = FocusNode();
+    _focusNode.addListener(_handleHighlightChange);
 
     FocusManager.instance.addHighlightModeListener(_focusHighlightModeChanged);
     _loadAppImage(Provider.of<AppsService>(context, listen: false));
@@ -133,6 +135,7 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
+    _focusNode.removeListener(_handleHighlightChange);
     FocusManager.instance.removeHighlightModeListener(_focusHighlightModeChanged);
     _curvedAnimation.dispose();
     _animation.dispose();
@@ -511,9 +514,17 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
     // );
   }
 
-  void _focusHighlightModeChanged(FocusHighlightMode mode)
-  {
-    setState(() { });
+  void _handleHighlightChange() {
+    final isNowHighlighted = FocusManager.instance.highlightMode == FocusHighlightMode.traditional && _focusNode.hasFocus;
+    if (isNowHighlighted != _wasHighlighted) {
+      setState(() {
+        _wasHighlighted = isNowHighlighted;
+      });
+    }
+  }
+
+  void _focusHighlightModeChanged(FocusHighlightMode mode) {
+    _handleHighlightChange();
   }
 
   bool _shouldHighlight(BuildContext context)
