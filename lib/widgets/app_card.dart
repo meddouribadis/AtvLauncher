@@ -66,6 +66,7 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
   bool _clicked = false;
   DateTime? _lastMoveAt;
   late FocusNode _focusNode;
+  late FocusHighlightMode _highlightMode;
 
   // late Future<(AppImageType, ImageProvider)> _appImageLoadFuture;
   (AppImageType, ImageProvider)? _loadedImage;
@@ -84,9 +85,17 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
     _focusNode = FocusNode();
 
-    FocusManager.instance.addHighlightModeListener(_focusHighlightModeChanged);
+    _highlightMode = FocusManager.instance.highlightMode;
+
+    _focusNode.addListener(() {
+      setState(() {});
+    });
+
+    FocusManager.instance.addHighlightModeListener(_onHighlightModeChanged);
+
     _loadAppImage(Provider.of<AppsService>(context, listen: false));
 
     // Check if we need to restore focus/reorder mode after a move
@@ -144,6 +153,7 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
     _curvedAnimation.dispose();
     _animation.dispose();
     _focusNode.dispose();
+    FocusManager.instance.removeHighlightModeListener(_onHighlightModeChanged);
 
     super.dispose();
   }
@@ -158,7 +168,7 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
         onPressed: _onPressed,
         onLongPress: _onLongPress,
         builder: (context) {
-          final bool shouldHighlight = _shouldHighlight(context);
+          final bool shouldHighlight = _shouldHighlight;
 
           return TweenAnimationBuilder<double>(
               duration: const Duration(milliseconds: 150),
@@ -192,15 +202,15 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
-                              InkWell(
+                              Focus(
                                 focusNode: _focusNode,
                                 autofocus: widget.autofocus,
-                                focusColor: Colors.transparent,
-                                child: appImageWidget,
-                                onTap: () =>
-                                    _onPressed(LogicalKeyboardKey.enter),
-                                onLongPress: () =>
-                                    _onLongPress(LogicalKeyboardKey.enter),
+                                child: GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+                                  onTap: () => _onPressed(LogicalKeyboardKey.enter),
+                                  onLongPress: () => _onLongPress(LogicalKeyboardKey.enter),
+                                  child: appImageWidget,
+                                ),
                                 onFocusChange: (focused) {
                                   Scrollable.ensureVisible(context,
                                       // This specific alignment value is not only
@@ -357,6 +367,14 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
         });
   }
 
+  void _onHighlightModeChanged(FocusHighlightMode mode) {
+    if (_highlightMode != mode) {
+      setState(() {
+        _highlightMode = mode;
+      });
+    }
+  }
+
   Future<void> _loadAppImage(AppsService service) async {
     try {
       Uint8List bytes = Uint8List(0);
@@ -431,7 +449,7 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(),
+            const Icon(Icons.hourglass_empty),
             SizedBox(height: 0, width: 16),
             Text("Loading")
           ],
@@ -511,10 +529,9 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
     setState(() {});
   }
 
-  bool _shouldHighlight(BuildContext context) {
-    return FocusManager.instance.highlightMode ==
-            FocusHighlightMode.traditional &&
-        Focus.of(context).hasFocus;
+  bool get _shouldHighlight {
+    return _highlightMode == FocusHighlightMode.traditional &&
+        _focusNode.hasFocus;
   }
 
   void _updateHighlightAnimation(bool shouldHighlight, bool enabled) {
