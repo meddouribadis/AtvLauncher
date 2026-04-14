@@ -90,6 +90,11 @@ android {
             applicationIdSuffix '.debug'
             signingConfig signingConfigs.debug
         }
+        profile {
+            initWith debug
+            applicationIdSuffix '.debug'
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled true
             shrinkResources true
