@@ -17,7 +17,6 @@
  */
 
 import 'dart:math';
-import 'dart:ui';
 import 'dart:ui' as ui;
 
 import 'package:collection/collection.dart';
@@ -28,6 +27,7 @@ import 'package:flauncher/providers/launcher_state.dart';
 import 'package:flauncher/providers/settings_service.dart';
 import 'package:flauncher/providers/wallpaper_service.dart';
 import 'package:flauncher/widgets/app_card.dart';
+import 'package:flauncher/widgets/cached_blur_backdrop.dart';
 import 'package:flauncher/widgets/category_clean_row.dart';
 import 'package:flauncher/widgets/category_row.dart';
 import 'package:flauncher/widgets/launcher_alternative_view.dart';
@@ -301,8 +301,7 @@ class _FLauncherState extends State<FLauncher> {
       //child: RepaintBoundary(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(32),
-        child:
-            backdropDisabled ? content : BackdropFilter(filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), child: content),
+        child: backdropDisabled ? content : CachedBlurBackdrop(sigma: 5, child: content),
         //),
       ),
     );
