@@ -253,7 +253,9 @@ class WallpaperService extends ChangeNotifier {
     await cleanVideoWallpaperFiles();
 
     await _settingsService.setGradientUuid(fLauncherGradient.uuid);
-    notifyListeners();
+    // Drop the in-memory wallpaper provider so the gradient is shown instead of
+    // the (now deleted) image/video file. _updateWallpaper notifies listeners.
+    _updateWallpaper(force: true);
   }
 
   // Cleaning methods
