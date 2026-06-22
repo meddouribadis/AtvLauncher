@@ -189,7 +189,7 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
                       child: Material(
                         borderRadius: BorderRadius.circular(12),
                         clipBehavior: Clip.antiAlias,
-                        elevation: shouldHighlight ? 16 : 4,
+                        elevation: shouldHighlight ? 8 : 4,
                         shadowColor: Colors.black,
                         child: Stack(
                           fit: StackFit.expand,
@@ -216,15 +216,16 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
                             ),
                             if (shouldHighlight)
                               if (animationEnabled)
-                                AnimatedBuilder(
-                                  animation: _curvedAnimation,
-                                  child: IgnorePointer(
-                                    child: RepaintBoundary(child: _HighlightOutline(color: _accentColor)),
+                                IgnorePointer(
+                                  child: RepaintBoundary(
+                                    child: AnimatedBuilder(
+                                      animation: _curvedAnimation,
+                                      builder: (context, _) {
+                                        final alpha = 0.4 + (_animation.value * 0.6);
+                                        return _HighlightOutline(color: _accentColor.withValues(alpha: alpha));
+                                      },
+                                    ),
                                   ),
-                                  builder: (context, child) {
-                                    final opacity = 0.4 + (_animation.value * 0.6);
-                                    return Opacity(opacity: opacity, child: child);
-                                  },
                                 )
                               else
                                 IgnorePointer(child: RepaintBoundary(child: _HighlightOutline(color: _accentColor))),
