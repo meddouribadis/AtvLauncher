@@ -6,7 +6,7 @@ lane :deploy do
       skip_upload_apk: true,
       skip_upload_screenshots: true,
       skip_upload_images: true,
-      aab: "../build/app/outputs/bundle/release/app-release.aab"
+      aab: "../build/app/outputs/bundle/playRelease/app-play-release.aab"
   )
 end
 

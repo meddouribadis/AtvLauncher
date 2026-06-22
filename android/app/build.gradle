@@ -45,6 +45,17 @@ secretProperties.setProperty("signing_key_password", "${System.getenv('FLAUNCHER
 secretProperties.setProperty("signing_key_alias", "${System.getenv('FLAUNCHER_SIGNING_KEY_ALIAS')}")
 
 android {
+    flavorDimensions += "store"
+
+    productFlavors {
+        play {
+            dimension "store"
+        }
+        github {
+            dimension "store"
+        }
+    }
+
     dependenciesInfo {
         // Disables dependency metadata when building APKs (for IzzyOnDroid/F-Droid)
         includeInApk = false
@@ -102,6 +113,8 @@ android {
         abi {
             // https://stackoverflow.com/a/39950584/21037183
             enable gradle.startParameter.taskNames.any { it.contains("assembleRelease") }
+            reset()
+            include "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
             universalApk true
         }
     }

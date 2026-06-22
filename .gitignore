@@ -90,3 +90,6 @@ android/keystore.properties
 
 # FVM Version Cache
 .fvm/
+
+# Waydroid
+waydroid*
