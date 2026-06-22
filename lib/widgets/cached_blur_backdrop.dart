@@ -218,7 +218,10 @@ class _BlurBlitRender extends RenderBox {
   void paint(PaintingContext context, Offset offset) {
     final scaleX = _image.width / _screenSize.width;
     final scaleY = _image.height / _screenSize.height;
-    final src = Rect.fromLTWH(offset.dx * scaleX, offset.dy * scaleY, size.width * scaleX, size.height * scaleY);
+    // Sample the blurred wallpaper at this box's true on-screen position so the
+    // crop stays aligned with the real wallpaper (offset alone is layer-local).
+    final screenPos = localToGlobal(Offset.zero);
+    final src = Rect.fromLTWH(screenPos.dx * scaleX, screenPos.dy * scaleY, size.width * scaleX, size.height * scaleY);
     final dst = offset & size;
     context.canvas.drawImageRect(_image, src, dst, Paint()..filterQuality = FilterQuality.low);
   }
