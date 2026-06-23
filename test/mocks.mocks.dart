@@ -542,6 +542,25 @@ class MockFLauncherChannel extends _i1.Mock implements _i12.FLauncherChannel {
       ) as _i9.Future<void>);
 
   @override
+  _i9.Future<bool> installApk(String? apkPath) => (super.noSuchMethod(
+        Invocation.method(
+          #installApk,
+          [apkPath],
+        ),
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
+
+  @override
+  _i9.Future<void> requestInstallUnknownAppsPermission() => (super.noSuchMethod(
+        Invocation.method(
+          #requestInstallUnknownAppsPermission,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
   void addAppsChangedListener(void Function(Map<String, dynamic>)? listener) =>
       super.noSuchMethod(
         Invocation.method(
@@ -561,6 +580,45 @@ class MockFLauncherChannel extends _i1.Mock implements _i12.FLauncherChannel {
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  _i9.Future<List<Map<dynamic, dynamic>>> getWatchNextItems() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getWatchNextItems,
+          [],
+        ),
+        returnValue: _i9.Future<List<Map<dynamic, dynamic>>>.value(
+            <Map<dynamic, dynamic>>[]),
+      ) as _i9.Future<List<Map<dynamic, dynamic>>>);
+
+  @override
+  _i9.Future<bool> launchWatchNextItem(
+    String? packageName,
+    String? contentId,
+    String? action,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #launchWatchNextItem,
+          [
+            packageName,
+            contentId,
+            action,
+          ],
+        ),
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
+
+  @override
+  _i9.Future<_i13.Uint8List> loadContentUriImage(String? contentUri) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #loadContentUriImage,
+          [contentUri],
+        ),
+        returnValue: _i9.Future<_i13.Uint8List>.value(_i13.Uint8List(0)),
+      ) as _i9.Future<_i13.Uint8List>);
 }
 
 /// A class which mocks [WallpaperService].
@@ -572,6 +630,12 @@ class MockWallpaperService extends _i1.Mock implements _i14.WallpaperService {
   }
 
   @override
+  int get wallpaperRevision => (super.noSuchMethod(
+        Invocation.getter(#wallpaperRevision),
+        returnValue: 0,
+      ) as int);
+
+  @override
   _i2.FLauncherGradient get gradient => (super.noSuchMethod(
         Invocation.getter(#gradient),
         returnValue: _FakeFLauncherGradient_0(
@@ -579,6 +643,12 @@ class MockWallpaperService extends _i1.Mock implements _i14.WallpaperService {
           Invocation.getter(#gradient),
         ),
       ) as _i2.FLauncherGradient);
+
+  @override
+  bool get isInitialized => (super.noSuchMethod(
+        Invocation.getter(#isInitialized),
+        returnValue: false,
+      ) as bool);
 
   @override
   bool get hasListeners => (super.noSuchMethod(
@@ -626,11 +696,61 @@ class MockWallpaperService extends _i1.Mock implements _i14.WallpaperService {
       ) as _i9.Future<void>);
 
   @override
+  _i9.Future<void> pickVideoWallpaper() => (super.noSuchMethod(
+        Invocation.method(
+          #pickVideoWallpaper,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> pickVideoWallpaperDay() => (super.noSuchMethod(
+        Invocation.method(
+          #pickVideoWallpaperDay,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> pickVideoWallpaperNight() => (super.noSuchMethod(
+        Invocation.method(
+          #pickVideoWallpaperNight,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
   _i9.Future<void> setGradient(_i2.FLauncherGradient? fLauncherGradient) =>
       (super.noSuchMethod(
         Invocation.method(
           #setGradient,
           [fLauncherGradient],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> cleanVideoWallpaperFiles() => (super.noSuchMethod(
+        Invocation.method(
+          #cleanVideoWallpaperFiles,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> cleanImageWallpaperFiles() => (super.noSuchMethod(
+        Invocation.method(
+          #cleanImageWallpaperFiles,
+          [],
         ),
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
@@ -679,6 +799,12 @@ class MockAppsService extends _i1.Mock implements _i15.AppsService {
       ) as bool);
 
   @override
+  int get layoutVersion => (super.noSuchMethod(
+        Invocation.getter(#layoutVersion),
+        returnValue: 0,
+      ) as int);
+
+  @override
   List<_i16.App> get applications => (super.noSuchMethod(
         Invocation.getter(#applications),
         returnValue: <_i16.App>[],
@@ -701,6 +827,15 @@ class MockAppsService extends _i1.Mock implements _i15.AppsService {
         Invocation.getter(#hasListeners),
         returnValue: false,
       ) as bool);
+
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 
   @override
   void clearPendingReorderFocusPackage() => super.noSuchMethod(
@@ -728,6 +863,15 @@ class MockAppsService extends _i1.Mock implements _i15.AppsService {
       );
 
   @override
+  bool consumeDirtyImage(String? packageName) => (super.noSuchMethod(
+        Invocation.method(
+          #consumeDirtyImage,
+          [packageName],
+        ),
+        returnValue: false,
+      ) as bool);
+
+  @override
   void sortCategory(_i3.Category? category) => super.noSuchMethod(
         Invocation.method(
           #sortCategory,
@@ -745,6 +889,43 @@ class MockAppsService extends _i1.Mock implements _i15.AppsService {
         ),
         returnValue: _i9.Future<_i13.Uint8List>.value(_i13.Uint8List(0)),
       ) as _i9.Future<_i13.Uint8List>);
+
+  @override
+  _i9.Future<void> setCustomAppBanner(
+    String? packageName,
+    String? imagePath,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setCustomAppBanner,
+          [
+            packageName,
+            imagePath,
+          ],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> removeCustomAppBanner(String? packageName) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #removeCustomAppBanner,
+          [packageName],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<bool> hasCustomBanner(String? packageName) => (super.noSuchMethod(
+        Invocation.method(
+          #hasCustomBanner,
+          [packageName],
+        ),
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
 
   @override
   _i9.Future<_i13.Uint8List> getAppIcon(String? packageName) =>
@@ -969,7 +1150,7 @@ class MockAppsService extends _i1.Mock implements _i15.AppsService {
   _i9.Future<int> addCategory(
     String? categoryName, {
     _i3.CategorySort? sort = _i3.CategorySort.manual,
-    _i3.CategoryType? type = _i3.CategoryType.row,
+    _i3.CategoryType? type = _i3.CategoryType.grid,
     int? columnsCount = 6,
     int? rowHeight = 110,
     bool? shouldNotifyListeners = true,
@@ -1231,15 +1412,6 @@ class MockAppsService extends _i1.Mock implements _i15.AppsService {
         ),
         returnValueForMissingStub: null,
       );
-
-  @override
-  void notifyListeners() => super.noSuchMethod(
-        Invocation.method(
-          #notifyListeners,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
 }
 
 /// A class which mocks [SettingsService].
@@ -1271,6 +1443,12 @@ class MockSettingsService extends _i1.Mock implements _i17.SettingsService {
   @override
   bool get showCategoryTitles => (super.noSuchMethod(
         Invocation.getter(#showCategoryTitles),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  bool get showAppNamesBelowIcons => (super.noSuchMethod(
+        Invocation.getter(#showAppNamesBelowIcons),
         returnValue: false,
       ) as bool);
 
@@ -1351,6 +1529,18 @@ class MockSettingsService extends _i1.Mock implements _i17.SettingsService {
           Invocation.getter(#screensaverClockStyle),
         ),
       ) as String);
+
+  @override
+  bool get dockBackdropFilterDisabled => (super.noSuchMethod(
+        Invocation.getter(#dockBackdropFilterDisabled),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  bool get showWatchNextSection => (super.noSuchMethod(
+        Invocation.getter(#showWatchNextSection),
+        returnValue: false,
+      ) as bool);
 
   @override
   _i4.Color get accentColor => (super.noSuchMethod(
@@ -1469,6 +1659,16 @@ class MockSettingsService extends _i1.Mock implements _i17.SettingsService {
       ) as _i9.Future<void>);
 
   @override
+  _i9.Future<void> setShowAppNamesBelowIcons(bool? show) => (super.noSuchMethod(
+        Invocation.method(
+          #setShowAppNamesBelowIcons,
+          [show],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
   _i9.Future<void> setShowDateInStatusBar(bool? show) => (super.noSuchMethod(
         Invocation.method(
           #setShowDateInStatusBar,
@@ -1536,6 +1736,27 @@ class MockSettingsService extends _i1.Mock implements _i17.SettingsService {
         Invocation.method(
           #setScreensaverClockStyle,
           [style],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> setDockBackdropFilterDisabled(bool? value) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setDockBackdropFilterDisabled,
+          [value],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> setShowWatchNextSection(bool? value) => (super.noSuchMethod(
+        Invocation.method(
+          #setShowWatchNextSection,
+          [value],
         ),
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
