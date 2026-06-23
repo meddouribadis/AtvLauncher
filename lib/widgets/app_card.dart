@@ -396,9 +396,6 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
     }
 
     final viewport = RenderAbstractViewport.of(renderObject);
-    if (viewport == null) {
-      return;
-    }
 
     final position = scrollable.position;
     final targetOffset = viewport.getOffsetToReveal(renderObject, alignment).offset;

@@ -20,7 +20,6 @@ import 'package:flauncher/actions.dart';
 import 'package:flauncher/providers/apps_service.dart';
 import 'package:flauncher/providers/settings_service.dart';
 import 'package:flauncher/providers/launcher_state.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -96,8 +95,7 @@ class FLauncherApp extends StatelessWidget
             background: const Color(0xFF121212),
           ),
           cardColor: const Color(0xFF1E1E1E), // Dark surface color
-          canvasColor: const Color(0xFF121212), // Dark background
-          dialogBackgroundColor: const Color(0xFF1E1E1E),
+          canvasColor: const Color(0xFF121212),
           scaffoldBackgroundColor: const Color(0xFF121212), // Dark background
           textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
@@ -105,7 +103,7 @@ class FLauncherApp extends StatelessWidget
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               )
           ),
-          dialogTheme: DialogTheme(
+          dialogTheme: DialogThemeData(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             backgroundColor: const Color(0xFF1E1E1E),
             titleTextStyle: Typography.material2018().white.titleLarge,
@@ -122,8 +120,6 @@ class FLauncherApp extends StatelessWidget
             selectionColor: accentColor.withOpacity(0.4),
             selectionHandleColor: accentColor,
           ),
-          // Override indicator colors for focus
-          indicatorColor: accentColor,
           progressIndicatorTheme: ProgressIndicatorThemeData(color: accentColor),
           sliderTheme: SliderThemeData(
             activeTrackColor: accentColor,
@@ -143,7 +139,7 @@ class FLauncherApp extends StatelessWidget
               if (states.contains(WidgetState.selected)) return accentColor.withOpacity(0.5);
               return null;
             }),
-          ),
+          ), tabBarTheme: TabBarThemeData(indicatorColor: accentColor),
         ),
       home: Builder(
         builder: (context) => PopScope(

@@ -60,16 +60,19 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dialogOptionBackButtonActionDoNothing => 'Nada';
 
   @override
-  String get dialogOptionBackButtonActionShowScreensaver => 'Mostrar salvapantallas';
+  String get dialogOptionBackButtonActionShowScreensaver =>
+      'Mostrar salvapantallas';
 
   @override
   String get dialogOptionBackButtonActionShowClock => 'Mostrar reloj';
 
   @override
-  String get dialogTextNoFileExplorer => 'Por favor, instale un gestor de archivos para seleccionar una imagen.';
+  String get dialogTextNoFileExplorer =>
+      'Por favor, instale un gestor de archivos para seleccionar una imagen.';
 
   @override
-  String get dialogTitleBackButtonAction => 'Elegir la acción del botón \'Atrás\'';
+  String get dialogTitleBackButtonAction =>
+      'Elegir la acción del botón \'Atrás\'';
 
   @override
   String disambiguateCategoryTitle(String title) {
@@ -144,7 +147,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get open => 'Abrir';
 
   @override
-  String get orSelectFormatSpecifiers => 'O seleccione especificadores de formato';
+  String get orSelectFormatSpecifiers =>
+      'O seleccione especificadores de formato';
 
   @override
   String get picture => 'Imagen';
@@ -173,7 +177,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get spacer => 'Espaciador';
 
   @override
-  String get spacerMaxHeightRequirement => 'Debe ser mayor a cero y menor o igual a 500';
+  String get spacerMaxHeightRequirement =>
+      'Debe ser mayor a cero y menor o igual a 500';
 
   @override
   String get statusBar => 'Barra de estado';
@@ -227,16 +232,19 @@ class AppLocalizationsEs extends AppLocalizations {
   String get updateInstallButton => 'Instalar';
 
   @override
-  String get updateInstallPermissionTitle => 'Se requiere permiso de instalación';
+  String get updateInstallPermissionTitle =>
+      'Se requiere permiso de instalación';
 
   @override
-  String get updateInstallPermissionBody => 'Permite que Arc Launcher instale apps desconocidas y vuelve a intentar la actualización.';
+  String get updateInstallPermissionBody =>
+      'Permite que Arc Launcher instale apps desconocidas y vuelve a intentar la actualización.';
 
   @override
   String get updateOpenPermissionSettingsButton => 'Abrir ajustes de permisos';
 
   @override
-  String get updateErrorGeneric => 'La actualización falló. Inténtalo de nuevo.';
+  String get updateErrorGeneric =>
+      'La actualización falló. Inténtalo de nuevo.';
 
   @override
   String textAboutDialog(String repoUrl) {
@@ -250,7 +258,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get time => 'Hora';
 
   @override
-  String get titleStatusBarSettingsPage => 'Elija la información a mostrar en la barra de estado';
+  String get titleStatusBarSettingsPage =>
+      'Elija la información a mostrar en la barra de estado';
 
   @override
   String get tvApplications => 'Aplicaciones del televisor';

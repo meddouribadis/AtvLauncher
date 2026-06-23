@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - [FVM](https://fvm.app) installed
-- Flutter version : **3.29.3** (see `.fvmrc`)
+- Flutter version : **3.41.9** (see `.fvmrc`)
 
 All commands below use `fvm flutter` to ensure the correct Flutter version.
 

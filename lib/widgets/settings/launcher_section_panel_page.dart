@@ -203,29 +203,29 @@ class LauncherSectionPanelPage extends StatelessWidget
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: FilledButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.resolveWith((states) {
-                          if (states.contains(MaterialState.disabled)) {
+                        backgroundColor: WidgetStateProperty.resolveWith((states) {
+                          if (states.contains(WidgetState.disabled)) {
                             return Colors.white10;
                           }
                           return Color(0xFF6366F1); // Indigo (Modern Primary)
                         }),
-                        foregroundColor: MaterialStateProperty.resolveWith((states) {
-                           if (states.contains(MaterialState.disabled)) {
+                        foregroundColor: WidgetStateProperty.resolveWith((states) {
+                           if (states.contains(WidgetState.disabled)) {
                              return Colors.white38;
                            }
                            return Colors.white;
                         }),
-                        shape: MaterialStatePropertyAll(
+                        shape: WidgetStatePropertyAll(
                           RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))
                         ),
-                        side: MaterialStateProperty.resolveWith((states) {
-                          if (states.contains(MaterialState.focused)) {
+                        side: WidgetStateProperty.resolveWith((states) {
+                          if (states.contains(WidgetState.focused)) {
                             return BorderSide(color: Colors.white, width: 2);
                           }
                           return null;
                         }),
-                        elevation: MaterialStatePropertyAll(0),
-                        padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 12))
+                        elevation: WidgetStatePropertyAll(0),
+                        padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 12))
                       ),
                       onPressed: onSavePressed,
                       child: Text(localizations.save),
@@ -239,19 +239,19 @@ class LauncherSectionPanelPage extends StatelessWidget
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: FilledButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Color(0xFF27272A)), // Zinc 800
-                      foregroundColor: MaterialStatePropertyAll(Color(0xFFEF4444)), // Red 500
-                      shape: MaterialStatePropertyAll(
+                      backgroundColor: WidgetStatePropertyAll(Color(0xFF27272A)), // Zinc 800
+                      foregroundColor: WidgetStatePropertyAll(Color(0xFFEF4444)), // Red 500
+                      shape: WidgetStatePropertyAll(
                           RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))
                       ),
-                      side: MaterialStateProperty.resolveWith((states) {
-                        if (states.contains(MaterialState.focused)) {
+                      side: WidgetStateProperty.resolveWith((states) {
+                        if (states.contains(WidgetState.focused)) {
                           return BorderSide(color: Colors.white, width: 2);
                         }
                         return null;
                       }),
-                      elevation: MaterialStatePropertyAll(0),
-                      padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 12))
+                      elevation: WidgetStatePropertyAll(0),
+                      padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 12))
                     ),
                     onPressed: () async {
                       state.setDeleted();
@@ -386,7 +386,7 @@ class _CategorySettingsState extends State<_CategorySettings>
               autofocus: _creating,
               isDense: true,
               isExpanded: true,
-              value: sectionNamePresets.contains(_name) ? _name : 'Custom...',
+              initialValue: sectionNamePresets.contains(_name) ? _name : 'Custom...',
               hint: Text(_name.isEmpty ? 'Select a name' : _name, style: Theme.of(context).textTheme.bodySmall),
               onChanged: (value) {
                 setState(() {
@@ -441,7 +441,7 @@ class _CategorySettingsState extends State<_CategorySettings>
               ),
               isDense: true,
               isExpanded: true,
-              value: _categorySort,
+              initialValue: _categorySort,
               onChanged: (value) {
                 setState(() {
                   _categorySort = value!;
@@ -476,7 +476,7 @@ class _CategorySettingsState extends State<_CategorySettings>
                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 2)),
                 contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               ),
-              value: _categoryType,
+              initialValue: _categoryType,
               onChanged: (value) {
                 setState(() {
                   _categoryType = value!;
@@ -510,7 +510,7 @@ class _CategorySettingsState extends State<_CategorySettings>
                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 2)),
                   contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 ),
-                value: _columnsCount,
+                initialValue: _columnsCount,
                 isDense: true,
                 isExpanded: true,
                 items: [for (int i = 5; i <= 10; i++) i]
@@ -541,7 +541,7 @@ class _CategorySettingsState extends State<_CategorySettings>
                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 2)),
                   contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 ),
-                value: _rowHeight,
+                initialValue: _rowHeight,
                 isDense: true,
                 isExpanded: true,
                 items: [for (int i = 80; i <= 150; i += 10) i]
@@ -690,7 +690,7 @@ class _LauncherSpacerSettingsState extends State<_LauncherSpacerSettings>
           ),
           isDense: true,
           isExpanded: true,
-          value: _numberValue,
+          initialValue: _numberValue,
           onChanged: (value) {
             setState(() {
               _numberValue = value!;

@@ -128,7 +128,7 @@ class FLauncherChannel {
       var result = await _methodChannel.invokeMethod('getWatchNextItems', _watchNextMaxItems);
       if (result == null) return [];
       return (result as List).cast<Map<dynamic, dynamic>>();
-    } on PlatformException catch (e) {
+    } on PlatformException {
       return [];
     } catch (e) {
       return [];
@@ -143,7 +143,7 @@ class FLauncherChannel {
         'action': action,
       });
       return result ?? false;
-    } on PlatformException catch (e) {
+    } on PlatformException {
       return false;
     } catch (e) {
       return false;
@@ -155,7 +155,7 @@ class FLauncherChannel {
     try {
       var result = await _methodChannel.invokeMethod('loadContentUriImage', contentUri);
       return result ?? Uint8List(0);
-    } on PlatformException catch (e) {
+    } on PlatformException {
       return Uint8List(0);
     } catch (e) {
       return Uint8List(0);
