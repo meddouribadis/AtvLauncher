@@ -1,0 +1,21 @@
+<svg viewBox="0 0 1024 1024" width="1024" height="1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Deep Mesh Blur scaled for 1024x1024 -->
+    <filter id="mesh-blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="120" />
+    </filter>
+  </defs>
+
+  <!-- Plain dark background, no border radius (full bleed for OS masking) -->
+  <rect x="0" y="0" width="1024" height="1024" fill="#0A0A0A" />
+
+  <!-- Mesh Gradients -->
+  <g>
+    <circle cx="200" cy="200" r="600" fill="#EC4899" filter="url(#mesh-blur)" opacity="0.8" />
+    <circle cx="824" cy="824" r="700" fill="#4F46E5" filter="url(#mesh-blur)" opacity="0.9" />
+    <circle cx="200" cy="824" r="500" fill="#06B6D4" filter="url(#mesh-blur)" opacity="0.8" />
+  </g>
+
+  <!-- The Arc -->
+  <path d="M 120 700 Q 512 150 904 700" fill="none" stroke="#FFFFFF" stroke-width="64" stroke-linecap="round" />
+</svg>

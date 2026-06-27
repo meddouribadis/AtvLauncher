@@ -1,0 +1,27 @@
+<svg viewBox="0 0 640 640" width="640" height="640" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Deep Mesh Blur scaled for 640x640 -->
+    <filter id="mesh-blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="80" />
+    </filter>
+  </defs>
+
+  <!-- Plain dark background, no border radius -->
+  <rect x="0" y="0" width="640" height="640" fill="#0A0A0A" />
+
+  <!-- Mesh Gradients -->
+  <g>
+    <circle cx="150" cy="150" r="350" fill="#EC4899" filter="url(#mesh-blur)" opacity="0.8" />
+    <circle cx="490" cy="490" r="400" fill="#4F46E5" filter="url(#mesh-blur)" opacity="0.9" />
+    <circle cx="150" cy="490" r="300" fill="#06B6D4" filter="url(#mesh-blur)" opacity="0.8" />
+  </g>
+
+  <!-- The Arc -->
+  <path d="M 80 400 Q 320 120 560 400" fill="none" stroke="#FFFFFF" stroke-width="40" stroke-linecap="round" />
+
+  <!-- Typography Inside the Banner -->
+  <text x="320" y="520" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="68" font-weight="700" letter-spacing="-2" text-anchor="middle">
+    <tspan fill="#FFFFFF">Arc </tspan>
+    <tspan font-weight="400" fill="#D4D4D8">Launcher</tspan>
+  </text>
+</svg>
