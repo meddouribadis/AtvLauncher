@@ -1,0 +1,24 @@
+<svg viewBox="0 0 1024 500" width="1024" height="500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Deep Mesh Blur scaled for 1024x500 -->
+    <filter id="mesh-blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="100" />
+    </filter>
+  </defs>
+
+  <!-- Plain dark background -->
+  <rect x="0" y="0" width="1024" height="500" fill="#0A0A0A" />
+
+  <!-- Mesh Gradients -->
+  <g>
+    <circle cx="200" cy="100" r="450" fill="#EC4899" filter="url(#mesh-blur)" opacity="0.8" />
+    <circle cx="850" cy="400" r="550" fill="#4F46E5" filter="url(#mesh-blur)" opacity="0.9" />
+    <circle cx="300" cy="450" r="400" fill="#06B6D4" filter="url(#mesh-blur)" opacity="0.8" />
+  </g>
+
+  <!-- Typography Inside the Banner -->
+  <text x="340" y="230" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="96" font-weight="700" font-style="italic" fill="#FFFFFF" text-anchor="start">
+    <tspan x="340" dy="0">arc</tspan>
+    <tspan x="340" dy="85">launcher</tspan>
+  </text>
+</svg>
