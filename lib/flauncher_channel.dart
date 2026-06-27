@@ -123,6 +123,12 @@ class FLauncherChannel {
       });
 
   // Watch Next / TV Channels API
+  Future<bool> checkWatchNextPermission() async =>
+      await _methodChannel.invokeMethod('checkWatchNextPermission') ?? false;
+
+  Future<void> requestWatchNextPermission() async =>
+      await _methodChannel.invokeMethod('requestWatchNextPermission');
+
   Future<List<Map<dynamic, dynamic>>> getWatchNextItems() async {
     try {
       var result = await _methodChannel.invokeMethod('getWatchNextItems', _watchNextMaxItems);

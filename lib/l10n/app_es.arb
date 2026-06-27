@@ -144,5 +144,11 @@
     "pickNightWallpaper": "Elegir fondo de noche",
     "video": "Vídeo",
     "pickDayVideoWallpaper": "Elegir vídeo de día",
-    "pickNightVideoWallpaper": "Elegir vídeo de noche"
+    "pickNightVideoWallpaper": "Elegir vídeo de noche",
+    "watchNextSectionTitle": "Ver después",
+    "showWatchNextSection": "Mostrar sección Ver después",
+    "watchNextPermissionTitle": "Se requiere permiso para Ver después",
+    "watchNextPermissionBody": "Permite el acceso a la guía de TV para mostrar lo que estabas viendo.",
+    "watchNextGrantPermission": "Conceder permiso",
+    "watchNextCheckPermission": "Comprobar de nuevo"
 }

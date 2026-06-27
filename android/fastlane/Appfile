@@ -1,2 +1,2 @@
 json_key_file("fastlane/google_play_api_key.json")
-package_name("me.efesser.flauncher")
+package_name("com.omeda.arc")

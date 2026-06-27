@@ -294,4 +294,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pickNightVideoWallpaper => 'Pick night video';
+
+  @override
+  String get watchNextSectionTitle => 'Watch Next';
+
+  @override
+  String get showWatchNextSection => 'Show Watch Next Section';
+
+  @override
+  String get watchNextPermissionTitle => 'Watch Next permission required';
+
+  @override
+  String get watchNextPermissionBody =>
+      'Allow access to TV listings to show your continue watching items.';
+
+  @override
+  String get watchNextGrantPermission => 'Grant permission';
+
+  @override
+  String get watchNextCheckPermission => 'Check again';
 }

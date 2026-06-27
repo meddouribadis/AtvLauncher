@@ -10,10 +10,30 @@ lane :deploy do
   )
 end
 
+desc "Submit a new build to Play Store closed testing (Android TV alpha track)"
+lane :deploy_closed do
+  upload_to_play_store(
+      track: "tv:alpha",
+      skip_upload_metadata: true,
+      skip_upload_apk: true,
+      skip_upload_screenshots: true,
+      skip_upload_images: true,
+      aab: "../build/app/outputs/bundle/playRelease/app-play-release.aab"
+  )
+end
+
 desc "Promote previous internal version to production"
 lane :promote do
   upload_to_play_store(
       track: "internal",
       track_promote_to: "production"
+  )
+end
+
+desc "Promote previous closed testing version to production (Android TV)"
+lane :promote_closed do
+  upload_to_play_store(
+      track: "tv:alpha",
+      track_promote_to: "tv:production"
   )
 end

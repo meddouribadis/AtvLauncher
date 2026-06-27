@@ -144,5 +144,11 @@
     "pickNightWallpaper": "Pick night wallpaper",
     "video": "Video",
     "pickDayVideoWallpaper": "Pick day video",
-    "pickNightVideoWallpaper": "Pick night video"
+    "pickNightVideoWallpaper": "Pick night video",
+    "watchNextSectionTitle": "Watch Next",
+    "showWatchNextSection": "Show Watch Next Section",
+    "watchNextPermissionTitle": "Watch Next permission required",
+    "watchNextPermissionBody": "Allow access to TV listings to show your continue watching items.",
+    "watchNextGrantPermission": "Grant permission",
+    "watchNextCheckPermission": "Check again"
 }

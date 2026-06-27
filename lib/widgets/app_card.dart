@@ -34,6 +34,24 @@ import '../models/category.dart';
 
 const _validationKeys = [LogicalKeyboardKey.select, LogicalKeyboardKey.enter, LogicalKeyboardKey.gameButtonA];
 
+const kAppCardAspectRatio = 16 / 9;
+const kAppCardHorizontalPadding = 12.0;
+const kAppCardVerticalPadding = 9.0;
+const kLauncherSectionHorizontalPadding = 24.0;
+const kAppNameLabelHeight = 24.0;
+
+/// Row extent for a grid/dock line given the content width between section paddings.
+double appCardRowExtentFromContentWidth(double contentWidth, {int columnCount = Category.ColumnsCount}) {
+  final slotWidth = contentWidth / columnCount;
+  return slotWidth / kAppCardAspectRatio;
+}
+
+/// Adjusted aspect ratio for grid cells that includes space for the app name label.
+double appCardGridAspectRatio(double crossAxisExtent, int columnsCount) {
+  final cellWidth = crossAxisExtent / columnsCount;
+  return cellWidth / (cellWidth / kAppCardAspectRatio + kAppNameLabelHeight);
+}
+
 class AppCard extends StatefulWidget {
   final App application;
   final Category category;
@@ -42,6 +60,10 @@ class AppCard extends StatefulWidget {
   final VoidCallback onMoveEnd;
   final bool handleUpNavigationToSettings;
   final double scrollAlignment;
+  final bool enforceAspectRatio;
+  final VoidCallback? onFocused;
+  final bool ensureVisibleOnFocus;
+  final bool onlyScrollWhenNearBottom;
 
   const AppCard({
     super.key,
@@ -52,6 +74,10 @@ class AppCard extends StatefulWidget {
     required this.onMoveEnd,
     this.handleUpNavigationToSettings = false,
     this.scrollAlignment = 0.5,
+    this.enforceAspectRatio = true,
+    this.onFocused,
+    this.ensureVisibleOnFocus = true,
+    this.onlyScrollWhenNearBottom = false,
   });
 
   @override
@@ -178,59 +204,62 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
             mainAxisSize: MainAxisSize.min,
             children: [
               Flexible(
-                child: AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: RepaintBoundary(
+                child: _wrapAspectRatio(RepaintBoundary(
                     child: AnimatedScale(
-                      scale: !_moving && shouldHighlight ? 1.2 : 1.0,
+                      scale: !_moving && shouldHighlight ? 1.10 : 1.0,
                       duration: const Duration(milliseconds: 150),
                       alignment: Alignment.center,
                       curve: Curves.easeInOut,
-                      child: Material(
-                        borderRadius: BorderRadius.circular(12),
-                        clipBehavior: Clip.antiAlias,
-                        elevation: shouldHighlight ? 8 : 4,
-                        shadowColor: Colors.black,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            InkWell(
-                              focusNode: _focusNode,
-                              autofocus: widget.autofocus,
-                              focusColor: Colors.transparent,
-                              child: appImageWidget,
-                              onTap: () => _onPressed(LogicalKeyboardKey.enter),
-                              onLongPress: () => _onLongPress(LogicalKeyboardKey.enter),
-                              onFocusChange: (focused) {
-                                _handleFocusChange(context, focused);
-                              },
-                            ),
-                            if (_moving) ..._arrows(),
-                            IgnorePointer(
-                              child: AnimatedOpacity(
-                                duration: const Duration(milliseconds: 200),
-                                curve: Curves.easeInOut,
-                                opacity: shouldHighlight ? 0.0 : 1.0,
-                                child: const ColoredBox(color: Color(0x1A000000)),
-                              ),
-                            ),
-                            if (shouldHighlight)
-                              if (animationEnabled)
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Material(
+                            borderRadius: BorderRadius.circular(12),
+                            clipBehavior: Clip.antiAlias,
+                            elevation: shouldHighlight ? 8 : 4,
+                            shadowColor: Colors.black,
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                InkWell(
+                                  focusNode: _focusNode,
+                                  autofocus: widget.autofocus,
+                                  focusColor: Colors.transparent,
+                                  child: appImageWidget,
+                                  onTap: () => _onPressed(LogicalKeyboardKey.enter),
+                                  onLongPress: () => _onLongPress(LogicalKeyboardKey.enter),
+                                  onFocusChange: (focused) {
+                                    _handleFocusChange(context, focused);
+                                  },
+                                ),
+                                if (_moving) ..._arrows(),
                                 IgnorePointer(
-                                  child: RepaintBoundary(
-                                    child: AnimatedBuilder(
-                                      animation: _curvedAnimation,
-                                      builder: (context, _) {
-                                        final alpha = 0.4 + (_animation.value * 0.6);
-                                        return _HighlightOutline(color: _accentColor.withValues(alpha: alpha));
-                                      },
-                                    ),
+                                  child: AnimatedOpacity(
+                                    duration: const Duration(milliseconds: 200),
+                                    curve: Curves.easeInOut,
+                                    opacity: shouldHighlight ? 0.0 : 1.0,
+                                    child: const ColoredBox(color: Color(0x1A000000)),
                                   ),
-                                )
-                              else
-                                IgnorePointer(child: RepaintBoundary(child: _HighlightOutline(color: _accentColor))),
-                          ],
-                        ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (shouldHighlight)
+                            if (animationEnabled)
+                              IgnorePointer(
+                                child: RepaintBoundary(
+                                  child: AnimatedBuilder(
+                                    animation: _curvedAnimation,
+                                    builder: (context, _) {
+                                      final alpha = 0.4 + (_animation.value * 0.6);
+                                      return _HighlightOutline(color: _accentColor.withValues(alpha: alpha));
+                                    },
+                                  ),
+                                ),
+                              )
+                            else
+                              IgnorePointer(child: RepaintBoundary(child: _HighlightOutline(color: _accentColor))),
+                        ],
                       ),
                     ),
                   ),
@@ -265,6 +294,13 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
         setState(() => _imageLoadError = true);
       }
     }
+  }
+
+  Widget _wrapAspectRatio(Widget child) {
+    if (widget.enforceAspectRatio) {
+      return AspectRatio(aspectRatio: kAppCardAspectRatio, child: child);
+    }
+    return child;
   }
 
   Widget _appImage() {
@@ -360,16 +396,20 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
       return;
     }
     _lastEnsureVisibleAt = now;
-    _ensureVisibleIfNeeded(
-      context,
-      // This specific alignment value is not only
-      // to center the focused card in the row while
-      // scrolling, but to prevent the topmost category
-      // title to be hidden by the content above it when
-      // scrolling from the app bar. How it relates to this,
-      // I don't know
-      alignment: widget.scrollAlignment,
-    );
+    if (widget.ensureVisibleOnFocus) {
+      _ensureVisibleIfNeeded(
+        context,
+        // This specific alignment value is not only
+        // to center the focused card in the row while
+        // scrolling, but to prevent the topmost category
+        // title to be hidden by the content above it when
+        // scrolling from the app bar. How it relates to this,
+        // I don't know
+        alignment: widget.scrollAlignment,
+        onlyWhenNearBottom: widget.onlyScrollWhenNearBottom,
+      );
+    }
+    widget.onFocused?.call();
   }
 
   void _updateHighlightAnimation() {
@@ -388,7 +428,7 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
     }
   }
 
-  void _ensureVisibleIfNeeded(BuildContext context, {required double alignment}) {
+  void _ensureVisibleIfNeeded(BuildContext context, {required double alignment, bool onlyWhenNearBottom = false}) {
     final renderObject = context.findRenderObject();
     final scrollable = Scrollable.maybeOf(context);
     if (renderObject == null || scrollable == null) {
@@ -398,8 +438,27 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
     final viewport = RenderAbstractViewport.of(renderObject);
 
     final position = scrollable.position;
-    final targetOffset = viewport.getOffsetToReveal(renderObject, alignment).offset;
     const minDeltaToScroll = 24.0;
+    if (onlyWhenNearBottom &&
+        (position.axisDirection == AxisDirection.down || position.axisDirection == AxisDirection.up)) {
+      const bottomEdgePadding = 96.0;
+      final targetOffset = (viewport.getOffsetToReveal(renderObject, 1).offset + bottomEdgePadding).clamp(
+        position.minScrollExtent,
+        position.maxScrollExtent,
+      );
+      if (targetOffset - position.pixels < minDeltaToScroll) {
+        return;
+      }
+
+      position.animateTo(
+        targetOffset,
+        curve: Curves.easeInOut,
+        duration: const Duration(milliseconds: 220),
+      );
+      return;
+    }
+
+    final targetOffset = viewport.getOffsetToReveal(renderObject, alignment).offset;
     if ((targetOffset - position.pixels).abs() < minDeltaToScroll) {
       return;
     }

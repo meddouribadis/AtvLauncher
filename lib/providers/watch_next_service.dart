@@ -28,7 +28,7 @@ class WatchNextService extends ChangeNotifier {
 
   List<WatchNextItem> _items = [];
   bool _isLoading = false;
-  bool _hasPermission = true;
+  bool _hasPermission = false;
   final Map<String, Uint8List> _posterCache = {};
   final Set<String> _loadingPosters = {};
   final Set<String> _failedPosters = {};
@@ -46,10 +46,9 @@ class WatchNextService extends ChangeNotifier {
   }
 
   void _init() async {
-    await refreshItems();
-    // Refresh periodically (every 5 minutes)
+    await refreshPermissionAndItems();
     _refreshTimer = Timer.periodic(const Duration(minutes: 5), (_) {
-      refreshItems();
+      refreshPermissionAndItems();
     });
   }
 
@@ -60,8 +59,45 @@ class WatchNextService extends ChangeNotifier {
     super.dispose();
   }
 
+  Future<void> checkPermission() async {
+    try {
+      _hasPermission = await _fLauncherChannel.checkWatchNextPermission();
+    } catch (e) {
+      debugPrint('WatchNext: Error checking permission: $e');
+      _hasPermission = false;
+    }
+    notifyListeners();
+  }
+
+  Future<void> requestPermission() async {
+    try {
+      await _fLauncherChannel.requestWatchNextPermission();
+    } catch (e) {
+      debugPrint('WatchNext: Error requesting permission: $e');
+    }
+  }
+
+  Future<void> refreshPermissionAndItems() async {
+    await checkPermission();
+    if (_hasPermission) {
+      await refreshItems();
+    } else {
+      _items = [];
+      notifyListeners();
+    }
+  }
+
   Future<void> refreshItems() async {
     if (_isLoading) return;
+
+    if (!_hasPermission) {
+      await checkPermission();
+      if (!_hasPermission) {
+        _items = [];
+        notifyListeners();
+        return;
+      }
+    }
 
     _isLoading = true;
     notifyListeners();
@@ -69,12 +105,11 @@ class WatchNextService extends ChangeNotifier {
     try {
       final results = await _fLauncherChannel.getWatchNextItems();
       _items = results.map((map) => WatchNextItem.fromMap(map)).toList();
-      _hasPermission = true;
 
       unawaited(_preloadInitialPosters());
     } catch (e) {
+      debugPrint('WatchNext: Error loading items: $e');
       _items = [];
-      _hasPermission = false;
     } finally {
       _isLoading = false;
       notifyListeners();

@@ -33,6 +33,7 @@ class CategoryRow extends StatelessWidget
 
   final bool isFirstSection;
   final bool showTitle;
+  final VoidCallback? onAppFocused;
 
   CategoryRow({
     Key? key,
@@ -40,17 +41,19 @@ class CategoryRow extends StatelessWidget
     required this.applications,
     this.isFirstSection = false,
     this.showTitle = true,
+    this.onAppFocused,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final showAppNames = context.select<SettingsService, bool>((s) => s.showAppNamesBelowIcons);
     Widget categoryContent;
     if (applications.isEmpty) {
       categoryContent = categoryContainerEmptyState(context);
     }
     else {
       categoryContent = SizedBox(
-        height: category.rowHeight.toDouble(),
+        height: category.rowHeight.toDouble() + (showAppNames ? kAppNameLabelHeight : 0),
         child: ListView.custom(
           padding: const EdgeInsets.all(8),
           scrollDirection: Axis.horizontal,
@@ -65,6 +68,7 @@ class CategoryRow extends StatelessWidget
                   application: applications[index],
                   autofocus: index == 0,
                   handleUpNavigationToSettings: isFirstSection,
+                  onFocused: onAppFocused,
                   onMove: (direction) => _onMove(context, direction, index),
                   onMoveEnd: () => _onMoveEnd(context)
                 )

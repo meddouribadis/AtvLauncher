@@ -19,6 +19,7 @@
 import 'package:flauncher/models/watch_next_item.dart';
 import 'package:flauncher/providers/settings_service.dart';
 import 'package:flauncher/providers/watch_next_service.dart';
+import 'package:flauncher/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
@@ -56,9 +57,30 @@ class WatchNextRow extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    return Selector<WatchNextService, ({bool isLoading, List<WatchNextItem> items})>(
-      selector: (_, service) => (isLoading: service.isLoading, items: service.items),
+    return Selector<WatchNextService, ({bool isLoading, bool hasPermission, List<WatchNextItem> items})>(
+      selector: (_, service) => (
+        isLoading: service.isLoading,
+        hasPermission: service.hasPermission,
+        items: service.items,
+      ),
       builder: (context, data, child) {
+        final localizations = AppLocalizations.of(context)!;
+        final watchNextService = context.read<WatchNextService>();
+
+        if (!data.hasPermission) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _WatchNextSectionTitle(title: localizations.watchNextSectionTitle),
+              _WatchNextPermissionBanner(
+                onGrant: () => watchNextService.requestPermission(),
+                onRecheck: () => watchNextService.refreshPermissionAndItems(),
+              ),
+              const SizedBox(height: 12),
+            ],
+          );
+        }
+
         if (data.isLoading) {
           return const SizedBox.shrink();
         }
@@ -70,21 +92,7 @@ class WatchNextRow extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 40, bottom: 8, top: 8),
-              child: Text(
-                'Watch Next',
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  shadows: const [
-                    Shadow(
-                      color: Colors.black54,
-                      offset: Offset(1, 1),
-                      blurRadius: 8,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            _WatchNextSectionTitle(title: localizations.watchNextSectionTitle),
             _WatchNextCleanRow(
               items: data.items,
               isFirstSection: isFirstSection,
@@ -93,6 +101,96 @@ class WatchNextRow extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+}
+
+class _WatchNextSectionTitle extends StatelessWidget {
+  final String title;
+
+  const _WatchNextSectionTitle({required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 40, bottom: 8, top: 8),
+      child: Text(
+        title,
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+          shadows: const [
+            Shadow(
+              color: Colors.black54,
+              offset: Offset(1, 1),
+              blurRadius: 8,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _WatchNextPermissionBanner extends StatelessWidget {
+  final VoidCallback onGrant;
+  final VoidCallback onRecheck;
+
+  const _WatchNextPermissionBanner({
+    required this.onGrant,
+    required this.onRecheck,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              const Icon(Icons.tv, size: 36),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      localizations.watchNextPermissionTitle,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      localizations.watchNextPermissionBody,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 16),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  ElevatedButton.icon(
+                    autofocus: true,
+                    onPressed: onGrant,
+                    icon: const Icon(Icons.lock_open),
+                    label: Text(localizations.watchNextGrantPermission),
+                  ),
+                  const SizedBox(height: 8),
+                  TextButton.icon(
+                    onPressed: onRecheck,
+                    icon: const Icon(Icons.refresh),
+                    label: Text(localizations.watchNextCheckPermission),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

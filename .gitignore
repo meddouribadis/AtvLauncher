@@ -93,3 +93,9 @@ android/keystore.properties
 
 # Waydroid
 waydroid*
+
+# Fastlane
+android/fastlane/report.xml
+android/fastlane/google_play_api_key.json
+android/fastlane/README.md
+

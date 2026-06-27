@@ -20,6 +20,7 @@ package com.omeda.arc;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.*;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -35,6 +36,7 @@ import android.media.tv.TvContract;
 import android.database.Cursor;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.annotation.RequiresApi;
 
@@ -73,6 +75,7 @@ public class MainActivity extends FlutterActivity {
     private final String APPS_EVENT_CHANNEL = "me.efesser.flauncher/event_apps";
     private final String NETWORK_EVENT_CHANNEL = "me.efesser.flauncher/event_network";
     private static final String PERMISSION_READ_TV_LISTINGS = "android.permission.READ_TV_LISTINGS";
+    private static final int REQUEST_CODE_READ_TV_LISTINGS = 1001;
     private static final String COLUMN_ASPECT_RATIO = "aspect_ratio";
 
     @Override
@@ -141,6 +144,11 @@ public class MainActivity extends FlutterActivity {
                     result.success(setSystemBrightness(brightness));
                 }
                 case "openWifiSettings" -> result.success(openWifiSettings());
+                case "checkWatchNextPermission" -> result.success(checkWatchNextPermission());
+                case "requestWatchNextPermission" -> {
+                    requestWatchNextPermission();
+                    result.success(null);
+                }
                 case "getWatchNextItems" -> {
                     int limit = call.arguments() != null ? (int) call.arguments() : 10;
                     result.success(getWatchNextItems(limit));
@@ -715,14 +723,32 @@ public class MainActivity extends FlutterActivity {
         return launchActivityFromAction(Settings.ACTION_SETTINGS);
     }
 
+    private boolean checkWatchNextPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true;
+        }
+        return checkSelfPermission(PERMISSION_READ_TV_LISTINGS) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestWatchNextPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return;
+        }
+        if (checkWatchNextPermission()) {
+            return;
+        }
+        ActivityCompat.requestPermissions(
+                this,
+                new String[]{PERMISSION_READ_TV_LISTINGS},
+                REQUEST_CODE_READ_TV_LISTINGS);
+    }
+
     private List<Map<String, Object>> getWatchNextItems(int limit) {
         List<Map<String, Object>> items = new ArrayList<>();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(PERMISSION_READ_TV_LISTINGS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
-                android.util.Log.w("MainActivity", "READ_TV_LISTINGS permission not granted");
-                return items;
-            }
+        if (!checkWatchNextPermission()) {
+            android.util.Log.w("MainActivity", "READ_TV_LISTINGS permission not granted");
+            return items;
         }
 
         try {

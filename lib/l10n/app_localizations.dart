@@ -631,6 +631,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pick night video'**
   String get pickNightVideoWallpaper;
+
+  /// No description provided for @watchNextSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch Next'**
+  String get watchNextSectionTitle;
+
+  /// No description provided for @showWatchNextSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Watch Next Section'**
+  String get showWatchNextSection;
+
+  /// No description provided for @watchNextPermissionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch Next permission required'**
+  String get watchNextPermissionTitle;
+
+  /// No description provided for @watchNextPermissionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow access to TV listings to show your continue watching items.'**
+  String get watchNextPermissionBody;
+
+  /// No description provided for @watchNextGrantPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Grant permission'**
+  String get watchNextGrantPermission;
+
+  /// No description provided for @watchNextCheckPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Check again'**
+  String get watchNextCheckPermission;
 }
 
 class _AppLocalizationsDelegate
