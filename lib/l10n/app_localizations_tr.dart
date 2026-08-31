@@ -333,4 +333,58 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get watchNextCheckPermission => 'Tekrar denetle';
+
+  @override
+  String get interface => 'Arayüz';
+
+  @override
+  String get system => 'Sistem';
+
+  @override
+  String get accentColor => 'Vurgu rengi';
+
+  @override
+  String get miscellaneous => 'Çeşitli';
+
+  @override
+  String get brightnessScheduler => 'Parlaklık zamanlayıcı';
+
+  @override
+  String get screensaverSettings => 'Ekran koruyucu ayarları';
+
+  @override
+  String get screensaverClockStyle => 'Ekran koruyucu saat stili';
+
+  @override
+  String get wifiUsagePeriod => 'Wi-Fi kullanım dönemi';
+
+  @override
+  String get showAppNamesBelowIcons => 'Simge altında uygulama adlarını göster';
+
+  @override
+  String get wifiUsage => 'Wi-Fi kullanımı';
+
+  @override
+  String get networkIndicator => 'Ağ göstergesi';
+
+  @override
+  String get customName => 'Özel ad';
+
+  @override
+  String get lastUsed => 'Son kullanım';
+
+  @override
+  String get daily => 'Günlük';
+
+  @override
+  String get weekly => 'Haftalık';
+
+  @override
+  String get monthly => 'Aylık';
+
+  @override
+  String get grantPermission => 'İzin ver';
+
+  @override
+  String get checkStatus => 'Durumu denetle';
 }

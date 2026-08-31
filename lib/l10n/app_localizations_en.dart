@@ -331,4 +331,58 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get watchNextCheckPermission => 'Check again';
+
+  @override
+  String get interface => 'Interface';
+
+  @override
+  String get system => 'System';
+
+  @override
+  String get accentColor => 'Accent Color';
+
+  @override
+  String get miscellaneous => 'Miscellaneous';
+
+  @override
+  String get brightnessScheduler => 'Brightness Scheduler';
+
+  @override
+  String get screensaverSettings => 'Screensaver Settings';
+
+  @override
+  String get screensaverClockStyle => 'Screensaver Clock Style';
+
+  @override
+  String get wifiUsagePeriod => 'WiFi Usage Period';
+
+  @override
+  String get showAppNamesBelowIcons => 'Show App Names Below Icons';
+
+  @override
+  String get wifiUsage => 'WiFi Usage';
+
+  @override
+  String get networkIndicator => 'Network Indicator';
+
+  @override
+  String get customName => 'Custom Name';
+
+  @override
+  String get lastUsed => 'Last Used';
+
+  @override
+  String get daily => 'Daily';
+
+  @override
+  String get weekly => 'Weekly';
+
+  @override
+  String get monthly => 'Monthly';
+
+  @override
+  String get grantPermission => 'Grant Permission';
+
+  @override
+  String get checkStatus => 'Check Status';
 }

@@ -19,6 +19,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flauncher/l10n/app_localizations.dart';
 import '../../providers/settings_service.dart';
 
 class ScreensaverClockStylePage extends StatelessWidget {
@@ -35,7 +36,7 @@ class ScreensaverClockStylePage extends StatelessWidget {
 
         return Column(
           children: [
-            Text('Screensaver Clock Style', style: Theme.of(context).textTheme.titleLarge),
+            Text(AppLocalizations.of(context)!.screensaverClockStyle, style: Theme.of(context).textTheme.titleLarge),
             const Divider(),
             Expanded(
               child: SingleChildScrollView(

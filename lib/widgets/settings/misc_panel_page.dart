@@ -18,7 +18,7 @@ class MiscPanelPage extends StatelessWidget {
 
     return Column(
       children: [
-        Text("Miscellaneous", style: Theme.of(context).textTheme.titleLarge),
+        Text(localizations.miscellaneous, style: Theme.of(context).textTheme.titleLarge),
         const Divider(),
         Expanded(
           child: ListView(
@@ -46,7 +46,7 @@ class MiscPanelPage extends StatelessWidget {
               RoundedSwitchListTile(
                 value: settingsService.showAppNamesBelowIcons,
                 onChanged: (value) => settingsService.setShowAppNamesBelowIcons(value),
-                title: Text("Show App Names Below Icons", style: Theme.of(context).textTheme.bodyMedium),
+                title: Text(localizations.showAppNamesBelowIcons, style: Theme.of(context).textTheme.bodyMedium),
                 secondary: Icon(Icons.subtitles),
               ),
               RoundedSwitchListTile(

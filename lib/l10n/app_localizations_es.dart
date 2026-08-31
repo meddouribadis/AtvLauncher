@@ -336,4 +336,58 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get watchNextCheckPermission => 'Comprobar de nuevo';
+
+  @override
+  String get interface => 'Interfaz';
+
+  @override
+  String get system => 'Sistema';
+
+  @override
+  String get accentColor => 'Color de acento';
+
+  @override
+  String get miscellaneous => 'Varios';
+
+  @override
+  String get brightnessScheduler => 'Programador de brillo';
+
+  @override
+  String get screensaverSettings => 'Ajustes del salvapantallas';
+
+  @override
+  String get screensaverClockStyle => 'Estilo del reloj del salvapantallas';
+
+  @override
+  String get wifiUsagePeriod => 'Período de uso de WiFi';
+
+  @override
+  String get showAppNamesBelowIcons => 'Mostrar nombres bajo los iconos';
+
+  @override
+  String get wifiUsage => 'Uso de WiFi';
+
+  @override
+  String get networkIndicator => 'Indicador de red';
+
+  @override
+  String get customName => 'Nombre personalizado';
+
+  @override
+  String get lastUsed => 'Último uso';
+
+  @override
+  String get daily => 'Diario';
+
+  @override
+  String get weekly => 'Semanal';
+
+  @override
+  String get monthly => 'Mensual';
+
+  @override
+  String get grantPermission => 'Conceder permiso';
+
+  @override
+  String get checkStatus => 'Comprobar estado';
 }

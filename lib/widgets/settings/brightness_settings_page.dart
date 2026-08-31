@@ -19,6 +19,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flauncher/l10n/app_localizations.dart';
 import '../../providers/brightness_service.dart';
 import '../rounded_switch_list_tile.dart';
 
@@ -31,12 +32,13 @@ class BrightnessSettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<BrightnessService>(
       builder: (context, brightnessService, _) {
+        final localizations = AppLocalizations.of(context)!;
         final isEnabled = brightnessService.isEnabled;
         final currentSlot = brightnessService.getCurrentTimeSlot();
-        
+
         return Column(
           children: [
-            Text('Brightness Scheduler', style: Theme.of(context).textTheme.titleLarge),
+            Text(localizations.brightnessScheduler, style: Theme.of(context).textTheme.titleLarge),
             const Divider(),
             Expanded(
               child: SingleChildScrollView(
@@ -89,13 +91,13 @@ class BrightnessSettingsPage extends StatelessWidget {
                                   ElevatedButton.icon(
                                     onPressed: brightnessService.requestPermission,
                                     icon: const Icon(Icons.settings),
-                                    label: const Text('Grant Permission'),
+                                    label: Text(localizations.grantPermission),
                                   ),
                                   const SizedBox(height: 8),
                                   TextButton.icon(
                                     onPressed: brightnessService.checkPermission,
                                     icon: const Icon(Icons.refresh),
-                                    label: const Text('Check Status'),
+                                    label: Text(localizations.checkStatus),
                                   ),
                                 ],
                               ),

@@ -1,4 +1,5 @@
 
+import 'package:flauncher/l10n/app_localizations.dart';
 import 'package:flauncher/providers/settings_service.dart';
 import 'package:flauncher/widgets/settings/focusable_settings_tile.dart';
 import 'package:flutter/material.dart';
@@ -11,18 +12,19 @@ class WifiUsagePeriodPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Consumer<SettingsService>(
         builder: (context, service, _) {
           return Column(
             children: [
-              Text('WiFi Usage Period', style: Theme.of(context).textTheme.titleLarge),
+              Text(localizations.wifiUsagePeriod, style: Theme.of(context).textTheme.titleLarge),
               const Divider(),
               Expanded(
                 child: ListView(
                   children: [
-                    _radioTile(context, service, 'Daily', WIFI_USAGE_DAILY),
-                    _radioTile(context, service, 'Weekly', WIFI_USAGE_WEEKLY),
-                    _radioTile(context, service, 'Monthly', WIFI_USAGE_MONTHLY),
+                    _radioTile(context, service, localizations.daily, WIFI_USAGE_DAILY),
+                    _radioTile(context, service, localizations.weekly, WIFI_USAGE_WEEKLY),
+                    _radioTile(context, service, localizations.monthly, WIFI_USAGE_MONTHLY),
                   ],
                 ),
               ),

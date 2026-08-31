@@ -705,6 +705,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Check again'**
   String get watchNextCheckPermission;
+
+  /// No description provided for @interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Interface'**
+  String get interface;
+
+  /// No description provided for @system.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get system;
+
+  /// No description provided for @accentColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Accent Color'**
+  String get accentColor;
+
+  /// No description provided for @miscellaneous.
+  ///
+  /// In en, this message translates to:
+  /// **'Miscellaneous'**
+  String get miscellaneous;
+
+  /// No description provided for @brightnessScheduler.
+  ///
+  /// In en, this message translates to:
+  /// **'Brightness Scheduler'**
+  String get brightnessScheduler;
+
+  /// No description provided for @screensaverSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Screensaver Settings'**
+  String get screensaverSettings;
+
+  /// No description provided for @screensaverClockStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Screensaver Clock Style'**
+  String get screensaverClockStyle;
+
+  /// No description provided for @wifiUsagePeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'WiFi Usage Period'**
+  String get wifiUsagePeriod;
+
+  /// No description provided for @showAppNamesBelowIcons.
+  ///
+  /// In en, this message translates to:
+  /// **'Show App Names Below Icons'**
+  String get showAppNamesBelowIcons;
+
+  /// No description provided for @wifiUsage.
+  ///
+  /// In en, this message translates to:
+  /// **'WiFi Usage'**
+  String get wifiUsage;
+
+  /// No description provided for @networkIndicator.
+  ///
+  /// In en, this message translates to:
+  /// **'Network Indicator'**
+  String get networkIndicator;
+
+  /// No description provided for @customName.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom Name'**
+  String get customName;
+
+  /// No description provided for @lastUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Used'**
+  String get lastUsed;
+
+  /// No description provided for @daily.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily'**
+  String get daily;
+
+  /// No description provided for @weekly.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly'**
+  String get weekly;
+
+  /// No description provided for @monthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get monthly;
+
+  /// No description provided for @grantPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Grant Permission'**
+  String get grantPermission;
+
+  /// No description provided for @checkStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Check Status'**
+  String get checkStatus;
 }
 
 class _AppLocalizationsDelegate

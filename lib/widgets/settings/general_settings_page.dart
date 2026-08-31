@@ -38,7 +38,7 @@ class GeneralSettingsPage extends StatelessWidget {
 
     return Column(
       children: [
-        Text('System', style: Theme.of(context).textTheme.titleLarge),
+        Text(localizations.system, style: Theme.of(context).textTheme.titleLarge),
         const Divider(),
         Expanded(
           child: SingleChildScrollView(
@@ -47,17 +47,17 @@ class GeneralSettingsPage extends StatelessWidget {
                 FocusableSettingsTile(
                   autofocus: true,
                   leading: const Icon(Icons.brightness_6),
-                  title: Text('Brightness Scheduler', style: Theme.of(context).textTheme.bodyMedium),
+                  title: Text(localizations.brightnessScheduler, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => Navigator.of(context).pushNamed(BrightnessSettingsPage.routeName),
                 ),
                 FocusableSettingsTile(
                   leading: const Icon(Icons.screenshot_monitor),
-                  title: Text('Screensaver Settings', style: Theme.of(context).textTheme.bodyMedium),
+                  title: Text(localizations.screensaverSettings, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => _openScreensaverSettings(),
                 ),
                 FocusableSettingsTile(
                   leading: const Icon(Icons.watch_later_outlined),
-                  title: Text('Screensaver Clock Style', style: Theme.of(context).textTheme.bodyMedium),
+                  title: Text(localizations.screensaverClockStyle, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => Navigator.of(context).pushNamed(ScreensaverClockStylePage.routeName),
                 ),
                 FocusableSettingsTile(
@@ -72,7 +72,7 @@ class GeneralSettingsPage extends StatelessWidget {
                 ),
                 FocusableSettingsTile(
                   leading: const Icon(Icons.wifi),
-                  title: Text('WiFi Usage Period', style: Theme.of(context).textTheme.bodyMedium),
+                  title: Text(localizations.wifiUsagePeriod, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => Navigator.of(context).pushNamed(WifiUsagePeriodPage.routeName),
                 ),
 
