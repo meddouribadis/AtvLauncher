@@ -54,12 +54,12 @@ class SettingsPanelPage extends StatelessWidget {
                 ),
                 FocusableSettingsTile(
                   leading: const Icon(Icons.auto_awesome_mosaic_outlined),
-                  title: Text('Interface', style: Theme.of(context).textTheme.bodyMedium),
+                  title: Text(localizations.interface, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => Navigator.of(context).pushNamed(InterfaceSettingsPage.routeName),
                 ),
                 FocusableSettingsTile(
                   leading: const Icon(Icons.settings_suggest_outlined),
-                  title: Text('System', style: Theme.of(context).textTheme.bodyMedium),
+                  title: Text(localizations.system, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => Navigator.of(context).pushNamed(GeneralSettingsPage.routeName),
                 ),
                 const Divider(),
