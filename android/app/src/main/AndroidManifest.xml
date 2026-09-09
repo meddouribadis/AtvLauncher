@@ -61,7 +61,8 @@
         android:banner="@drawable/banner"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Arc Launcher">
+        android:label="Arc Launcher"
+        android:requestLegacyExternalStorage="true">
         <!--
           Disable Impeller and fall back to the Skia renderer.
           On low-end Android TV GPUs (e.g. Fire TV Stick) the Impeller GLES
